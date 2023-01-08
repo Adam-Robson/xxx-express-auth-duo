@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const fs = require('fs').promises;
 
 module.exports = (pool) => {
@@ -7,7 +6,7 @@ module.exports = (pool) => {
     .then((sql) => pool.query(sql))
     .then(() => {
       if (process.env.NODE_ENV !== 'test') {
-        console.log('✅ Database setup complete!');
+        console.log('Database setup complete!');
       }
     })
     .catch((error) => {
@@ -15,13 +14,13 @@ module.exports = (pool) => {
 
       if (dbNotFound) {
         const [err, db] = dbNotFound;
-        console.error('❌ Error: ' + err);
+        console.error('Error: ' + err);
         console.info(
           `Try running \`createdb -U postgres ${db}\` in your terminal`
         );
       } else {
         console.error(error);
-        console.error('❌ Error: ' + error.message);
+        console.error('Error: ' + error.message);
       }
     });
 };
